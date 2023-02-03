@@ -33,8 +33,9 @@ function putUser(dbConnection, body, callback) {
       }
     }
   });
-  console.log('hello');
+  console.log(sqlQuery);
 }
+
 
 // validateCredential function
 function validateCredential(body, callback) {

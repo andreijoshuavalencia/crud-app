@@ -15,9 +15,10 @@ function Home() {
 
   return (
     <div>
+        <h1>Users List</h1>
       <Link to='/add'>Add a user</Link>
       {typeof backendData === "undefined" ? (
-        <p>Loading...</p>
+        <h5>No Data Available</h5>
       ) : (
         <DataTable props={backendData} />
       )}

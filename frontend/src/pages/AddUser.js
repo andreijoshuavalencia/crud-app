@@ -24,7 +24,7 @@ function AddUser() {
     
   },[details]);
 
- 
+
   const formHandler = (event) => {
     event.preventDefault();
     setDetails({"user_fname":firstName, "user_lname":lastName});

@@ -1,8 +1,13 @@
 import React from "react";
 import { Table } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 function DataTable({props}) {
-    console.log({props})
+    
+    const navigate = useNavigate();
+    const goRouteId = (id) => {
+     navigate(`/edit/${id}`);
+    }  
   return (
       <Table striped bordered hover>
         <thead>
@@ -14,11 +19,12 @@ function DataTable({props}) {
         </thead>
         <tbody>
             {props.map((prop)=>(
-                <tr key={prop.id}>
-                    <td >{prop.user_id}</td>
+                <tr key={prop.id} onClick={()=> goRouteId(prop.user_id)}>
+                    <td value={prop.user_id}  >{prop.user_id}</td>
                     <td>{prop.user_fname}</td>
                     <td>{prop.user_lname}</td>
                 </tr>
+
             ))}
         </tbody>
       </Table>

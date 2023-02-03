@@ -69,7 +69,7 @@ function updateUser (req, res, _dbConnection, next) {
 
     _dbConnection.query(sqlQuery, sqlData, function (err, result){
         if(err) {
-            let err = {}
+            // let err = {}
             console.log('error : updateUser Err : ' + err);
             err.status = '500'
             err.message = 'Internal Server Error'
