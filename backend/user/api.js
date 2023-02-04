@@ -1,13 +1,12 @@
 var GET_all_user = require("./GET_all_user");
 var GET_user = require("./GET_user");
 var POST_user = require("./POST_user");
-var PUT_user = require('./PUT_user');
-var DELETE_user = require('./DELETE_user');
+var PUT_user = require("./PUT_user");
+var DELETE_user = require("./DELETE_user");
 
 module.exports.init = function init(server, dbConnection) {
   server.get("/api/user", function (req, res) {
     // call GET_all_user function in the GET_all_user.js
-
     GET_all_user.GET_all_user(req, res, dbConnection);
     console.log("info: done with GET_all_user.GET_all_user");
   });
@@ -27,17 +26,14 @@ module.exports.init = function init(server, dbConnection) {
   //---------------
 
   // update user
-  server.put("/api/user/:userId", function(req, res, next){
-      PUT_user.PUT_user(req, res, dbConnection, next)
-      console.log('info', 'done with PUT_user.PUT_user')
+  server.put("/api/user/:userId", function (req, res, next) {
+    PUT_user.PUT_user(req, res, dbConnection, next);
+    console.log("info", "done with PUT_user.PUT_user");
   });
 
   // Delete user
-  server.delete('/api/user/:userId', function(req,res,next){
-    DELETE_user.DELETE_user(req,res,dbConnection, next)
-    console.log('info', 'done with DELETE_user.DELETE_user')
-    
+  server.delete("/api/user/:userId", function (req, res, next) {
+    DELETE_user.DELETE_user(req, res, dbConnection, next);
+    console.log("info", "done with DELETE_user.DELETE_user");
   });
-
-
 };
