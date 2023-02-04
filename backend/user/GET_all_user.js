@@ -1,6 +1,7 @@
 exports.GET_all_user = function(req, res, _dbConnection) {
     // initialize db connection
     dbConnection = _dbConnection;
+    console.log(req.body);
 
     // initialize response
     let resp;
@@ -53,7 +54,6 @@ function getAllUser(callback) {
 			//push record in allUserList array
 			allUserList.push(allUser);
 		}
-
 		//returns User list
 		callback(null, allUserList);
 	});

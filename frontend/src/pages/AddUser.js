@@ -1,50 +1,62 @@
 import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 function AddUser() {
-  const [details, setDetails] = useState([]);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [details, setDetails] = useState([{
+    user_fname:"",
+    user_lname:"",
+  }]);
+  const navigate = useNavigate();
 
-  useEffect(()=> {
-    fetch("/api/user", {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        // We convert the React state to JSON and send it as the POST body
-        body: JSON.stringify(details),
-      }).then(function (response) {
-        // console.log(response);
-        return response.json();
-      });
-    
-  },[details]);
+  // useEffect(()=> {
+  //   fetch("/api/user", {
+  //       method: "POST",
+  //       headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //       },
+  //       // We convert the React state to JSON and send it as the POST body
+  //       body: JSON.stringify(details),
+  //     }).then(function (response) {
+  //       // console.log(response);
+  //       return response.json();
+  //     });
+  // },[details]);
 
 
-  const formHandler = (event) => {
+  const changeHandler = (event) => {
     event.preventDefault();
-    setDetails({"user_fname":firstName, "user_lname":lastName});
-    // console.log(firstName);
-    // console.log(lastName);
+    try{
+      setDetails(prev =>({...prev, [event.target.name]:event.target.value}))
+    }catch(err){
+      console.log(err)
+    }
   };
 
-//   console.log(details);
+  const clickHandler = async e => {
+    e.preventDefault();
+    try{
+      await axios.post('/api/user', details);
+      navigate('/home');
+    }catch(err){
+      console.log('error: '+ err);
+    }
+  }
 
   return (
-    <Form onSubmit={formHandler}>
+    <Form>
       <h1>Create a User</h1>
       <Link to="/home">Go Back Home</Link>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>First Name</Form.Label>
         <Form.Control
           type="text"
-          value={firstName}
-          name="first_name"
-          onChange={(e) => setFirstName(e.target.value)}
+          // value={firstName}
+          name="user_fname"
+          onChange={changeHandler}
           placeholder="Enter First Name"
         />
       </Form.Group>
@@ -52,13 +64,13 @@ function AddUser() {
         <Form.Label>Last Name</Form.Label>
         <Form.Control
           type="text"
-          value={lastName}
-          name="last_name"
-          onChange={(e) => setLastName(e.target.value)}
+          // value={lastName}
+          name="user_lname"
+          onChange={changeHandler}
           placeholder="Enter Last Name"
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" onClick={clickHandler}>
         Add
       </Button>
     </Form>

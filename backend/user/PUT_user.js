@@ -7,7 +7,6 @@ exports.PUT_user = function (req, res, _dbConnection, next) {
 
 function updateUser (req, res, _dbConnection, next) {
     // passes req.body so we can only type body in the future
-
     let body = req.body;
 
     // initialize sqlData array
@@ -27,6 +26,7 @@ function updateUser (req, res, _dbConnection, next) {
     if(body.user_fname) {
         sqlQuery += ` user_fname = ? `;
         sqlData.push(body.user_fname);
+        // console.log(sqlData);
         if(count > 1) {
             // check if the body object we count is above 1 then we will add a comma.
             sqlQuery += `,`
@@ -39,10 +39,10 @@ function updateUser (req, res, _dbConnection, next) {
         sqlData.push(body.user_lname)
     
         //check if the body object we count is above 1 then we will add a comma
-        if(count >  1){
-            sqlQuery +=  `,`
-            count--;
-        }
+        // if(count >  1){
+        //     sqlQuery +=  `,`
+        //     count--;
+        // }
     }
 
 
@@ -62,12 +62,11 @@ function updateUser (req, res, _dbConnection, next) {
     // add WHERE wuery in which id we will be updating
     // req.params.userId will be fetching the userId
     sqlData.push(req.params.userId);
-    console.log();
-    
-    sqlQuery += ` WHERE user_id = ? `
-    console.log(sqlQuery);
+    sqlQuery += ` WHERE user_id = ? ` ;  
+    console.log("id is " + req.params.userId); 
 
     _dbConnection.query(sqlQuery, sqlData, function (err, result){
+        console.log(sqlQuery)
         if(err) {
             // let err = {}
             console.log('error : updateUser Err : ' + err);

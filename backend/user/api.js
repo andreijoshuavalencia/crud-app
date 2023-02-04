@@ -2,6 +2,7 @@ var GET_all_user = require("./GET_all_user");
 var GET_user = require("./GET_user");
 var POST_user = require("./POST_user");
 var PUT_user = require('./PUT_user');
+var DELETE_user = require('./DELETE_user');
 
 module.exports.init = function init(server, dbConnection) {
   server.get("/api/user", function (req, res) {
@@ -20,14 +21,22 @@ module.exports.init = function init(server, dbConnection) {
   //----------------
   server.post("/api/user", function (req, res) {
     POST_user.POST_user(req, res, dbConnection);
+    console.log(req.body);
     console.log("info", "done with POST_user.POST_user");
   });
   //---------------
 
   // update user
-  server.put('/api/user/:userId', function(req, res, next){
+  server.put("/api/user/:userId", function(req, res, next){
       PUT_user.PUT_user(req, res, dbConnection, next)
       console.log('info', 'done with PUT_user.PUT_user')
+  });
+
+  // Delete user
+  server.delete('/api/user/:userId', function(req,res,next){
+    DELETE_user.DELETE_user(req,res,dbConnection, next)
+    console.log('info', 'done with DELETE_user.DELETE_user')
+    
   });
 
 
