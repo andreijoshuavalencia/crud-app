@@ -1,9 +1,10 @@
 import React from "react";
 import { Table, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-function DataTable({ props }) {
+function DataTable({props}) {
+
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/api/user/${id}`);
@@ -13,22 +14,30 @@ function DataTable({ props }) {
     }
   };
 
+  // console.log(props[2].hobbies.length)
+
   return (
-    <Table striped bordered hover responsive>
+    <Table striped bordered hover responsive="sm" className="text-center">
       <thead>
         <tr>
-          <th>#</th>
-          <th>First Name</th>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
           <th>Last Name</th>
+          <th>Address</th>
+          <th>Age</th>
+          <th>Hobbies</th>
           <th>Options</th>
         </tr>
       </thead>
       <tbody>
         {props.map((prop) => (
           <tr key={prop.id}>
-            <td data-value={prop.user_id}>{prop.user_id}</td>
+            <td><Link to={`/user/${prop.user_id}`}>{prop.user_id}</Link></td>
             <td>{prop.user_fname}</td>
             <td>{prop.user_lname}</td>
+            <td>{prop.address}</td>
+            <td>{prop.age}</td>
+            <td>{prop.hobbies}</td>
             <td>
               <Link to={`/edit/${prop.user_id}`}>
                 <Button className="px-3 mx-3">Update</Button>

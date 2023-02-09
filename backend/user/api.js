@@ -5,6 +5,7 @@ var PUT_user = require("./PUT_user");
 var DELETE_user = require("./DELETE_user");
 
 module.exports.init = function init(server, dbConnection) {
+  
   server.get("/api/user", function (req, res) {
     // call GET_all_user function in the GET_all_user.js
     GET_all_user.GET_all_user(req, res, dbConnection);
@@ -20,7 +21,6 @@ module.exports.init = function init(server, dbConnection) {
   //----------------
   server.post("/api/user", function (req, res) {
     POST_user.POST_user(req, res, dbConnection);
-    console.log(req.body);
     console.log("info", "done with POST_user.POST_user");
   });
   //---------------

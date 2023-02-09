@@ -11,6 +11,9 @@ function AddUser() {
     {
       user_fname: "",
       user_lname: "",
+      address: "",
+      age: "",
+      hobbies: ""
     },
   ]);
   const navigate = useNavigate();
@@ -40,7 +43,7 @@ function AddUser() {
   return (
     <Form>
       <h1>Create a User</h1>
-      <Link to="/home">Go Back Home</Link>
+      <Link to="/home"><Button variant="secondary mb-3">Go Back Home</Button></Link>
       <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
         <Form.Label column sm="2">
           First Name
@@ -66,6 +69,48 @@ function AddUser() {
             name="user_lname"
             onChange={changeHandler}
             placeholder="Enter Last Name"
+          />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="formBasicAddress">
+        <Form.Label column sm="2">
+          Address
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control
+            type="text"
+            // value={lastName}
+            name="address"
+            onChange={changeHandler}
+            placeholder="Enter Address"
+          />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="formBasicAge">
+        <Form.Label column sm="2">
+          Age
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control
+            type="text"
+            // value={lastName}
+            name="age"
+            onChange={changeHandler}
+            placeholder="Enter Age"
+          />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="formBasicHobbies">
+        <Form.Label column sm="2">
+         Hobbies
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control
+            type="text"
+            // value={lastName}
+            name="hobbies"
+            onChange={changeHandler}
+            placeholder="Enter hobbies"
           />
         </Col>
       </Form.Group>

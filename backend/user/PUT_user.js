@@ -39,25 +39,44 @@ function updateUser (req, res, _dbConnection, next) {
         sqlData.push(body.user_lname)
     
         //check if the body object we count is above 1 then we will add a comma
+        if(count >  1){
+            sqlQuery +=  `,`
+            count--;
+        }
+    }
+
+    if (body.address) {
+        sqlQuery +=  ` address = ? `
+        sqlData.push(body.address)
+    
+        //check if the body object we count is above 1 then we will add a comma
+        if(count >  1){
+            sqlQuery +=  `,`
+            count--;
+        }
+    }
+
+    if (body.age) {
+        sqlQuery +=  ` age = ? `
+        sqlData.push(body.age)
+    
+        //check if the body object we count is above 1 then we will add a comma
+        if(count >  1){
+            sqlQuery +=  `,`
+            count--;
+        }
+    }
+
+    if (body.hobbies) {
+        sqlQuery +=  ` hobbies = ? `
+        sqlData.push(body.hobbies)
+    
+        //check if the body object we count is above 1 then we will add a comma
         // if(count >  1){
         //     sqlQuery +=  `,`
         //     count--;
         // }
     }
-
-
-    // concat user_isdel if not empty to the sql query.
-    // is user_isdel is one, delete.
-    // if (body.user_isdel) {
-    //     sqlQuery += ` user_isdel = ? ` 
-    //     sqlData.push(body.user_isdel);
-
-    //     // check if the body object we count is above 1 then we will add a comma.
-    //     if (count > 1) {
-    //         sqlQuery += `,`
-    //         count--;
-    //     }
-    // }
 
     // add WHERE wuery in which id we will be updating
     // req.params.userId will be fetching the userId

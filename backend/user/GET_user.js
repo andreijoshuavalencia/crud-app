@@ -58,7 +58,9 @@ exports.GET_user = function (req, res, _dbConnection) {
           user_id: recordset[0].user_id,
           user_fname: recordset[0].user_fname,
           user_lname: recordset[0].user_lname,
-          user_isdel: recordset[0].user_isdel,
+          address: recordset[0].address,
+          age: recordset[0].age,
+          hobbies: recordset[0].hobbies,
         };
       }
 

@@ -19,21 +19,22 @@ exports.POST_user = function (req, res, _dbConnection) {
 // putUser function
 function putUser(dbConnection, body, callback) {
   // we will save the user_fname and user_lname that in the request body
-  let sqlData = [body.user_fname, body.user_lname];
+  let sqlData = [body.user_fname, body.user_lname, body.address, body.age, body.hobbies];
 
   let sqlQuery =
-    "INSERT INTO user_tbl(user_fname, user_lname, user_isdel) " +
-    "VALUES (?,?,0)";
+    "INSERT INTO user_tbl(user_fname, user_lname, address, age, hobbies) " +
+    "VALUES (?,?,?,?,?)";
   dbConnection.query(sqlQuery, sqlData, function (err, result) {
     {
       if (err) {
-        console.log("error" + TAG, "putUser Err : " + err);
+        console.log("error " , "putUser Err : " + err);
       } else {
         callback(null, result);
       }
     }
   });
-  console.log(sqlQuery);
+  console.log('sql query is : ' + sqlQuery);
+  console.log('sql data is : ' + sqlData);
 }
 
 
