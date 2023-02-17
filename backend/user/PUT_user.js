@@ -20,6 +20,7 @@ function updateUser (req, res, _dbConnection, next) {
             count++;
         }
     }
+    console.log("count is: " + count);
 
     // make the update sql query.
     let sqlQuery = `UPDATE user_tbl SET `

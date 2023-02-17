@@ -9,15 +9,25 @@ import Col from "react-bootstrap/Col";
 function EditUser() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [details, setDetails] = useState([
-    {
-      user_fname: "",
-      user_lname: "",
-    },
-  ]);
-
+  const [details, setDetails] = useState([]);
+  const [backendData, setBackendData] = useState([{}]);
   const id = location.pathname.split("/")[2];
 
+  // fetching backend data to put to placeholder 
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        const res = await axios.get(`/api/user/${id}`);
+        setBackendData(res.data.user);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAll();
+  }, [id]);
+
+
+  // updating the existing details
   const changeHandler = (event) => {
     event.preventDefault();
     try {
@@ -54,7 +64,7 @@ function EditUser() {
             // value={firstName}
             name="user_fname"
             onChange={changeHandler}
-            placeholder="Enter First Name"
+            placeholder={backendData.user_fname}
           />
         </Col>
       </Form.Group>
@@ -68,7 +78,7 @@ function EditUser() {
             // value={lastName}
             name="user_lname"
             onChange={changeHandler}
-            placeholder="Enter Last Name"
+            placeholder={backendData.user_lname}
           />
         </Col>
       </Form.Group>
@@ -82,7 +92,7 @@ function EditUser() {
             // value={lastName}
             name="address"
             onChange={changeHandler}
-            placeholder="Enter Address"
+            placeholder={backendData.address}
           />
         </Col>
       </Form.Group>
@@ -96,7 +106,7 @@ function EditUser() {
             // value={lastName}
             name="age"
             onChange={changeHandler}
-            placeholder="Enter Age"
+            placeholder={backendData.age}
           />
         </Col>
       </Form.Group>
@@ -110,7 +120,7 @@ function EditUser() {
             // value={lastName}
             name="hobbies"
             onChange={changeHandler}
-            placeholder="Enter Hobbies"
+            placeholder={backendData.hobbies}
           />
         </Col>
       </Form.Group>
